@@ -1,0 +1,16 @@
+version: '3.8'
+
+networks:
+  dockerland:
+    name: dockerland
+
+services:
+  laravel:
+    image: nginx
+    container_name: ${SERVICE}
+    networks:
+      - dockerland
+    environment:
+      - VIRTUAL_HOST=${URL}
+      - LETSENCRYPT_EMAIL=${ADMIN_EMAIL}
+      - LETSENCRYPT_HOST=${URL}
