@@ -5,12 +5,44 @@ networks:
     name: dockerland
 
 services:
-  laravel:
-    image: nginx
-    container_name: ${SERVICE}
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    container_name: nginx
+    depends_on:
+      - php
+      - mysql
+    volumes:
+      - ./src:/var/www/html
     networks:
       - dockerland
     environment:
       - VIRTUAL_HOST=${URL}
       - LETSENCRYPT_EMAIL=${ADMIN_EMAIL}
       - LETSENCRYPT_HOST=${URL}
+
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: php
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - dockerland
+
+  mysql:
+    image: mysql:5.7.32
+    container_name: mysql
+    ports:
+      - 4306:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: laraveldb
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - dockerland
