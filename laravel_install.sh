@@ -17,7 +17,7 @@ mkdir $DIR/src
 
 # Install Laravel
 docker-compose run --rm composer create-project laravel/laravel .
-docker-compose run -rm artisan migrate
+docker-compose run --rm artisan migrate
 
 # Start Services
 $DIR/service_up.sh
