@@ -4,6 +4,9 @@ DIR=$PWD
 # Stop Services
 $DIR/service_down.sh
 
+# Set environment
+cp $DIR/.env.example $DIR/.env
+
 # Re-Create MySQL Database
 rm -R $DIR/mysql
 mkdir $DIR/mysql

@@ -16,7 +16,7 @@ mkdir $DIR/src
 echo "*" > $DIR/src/.gitignore
 echo "!.gitignore" >> $DIR/src/.gitignore
 mkdir $DIR/src/public
-echo "<h1>Make sure to install Laravel using 'install_laravel.sh'</h1>" > $DIR/src/public/index.php
+echo "<pre>Make sure to install Laravel using 'laravel_install.sh'</pre>" > $DIR/src/public/index.php
 
 # Reset Environment
 rm $DIR/.env
