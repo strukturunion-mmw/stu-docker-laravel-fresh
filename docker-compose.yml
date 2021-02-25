@@ -61,6 +61,9 @@ services:
       context: .
       dockerfile: php.dockerfile
     container_name: artisan
+    depends_on:
+      - php
+      - mysql
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html

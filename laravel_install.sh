@@ -34,7 +34,3 @@ sed -i '' -e "s/DB_PASSWORD=/DB_PASSWORD=$MYSQL_PASSWORD/g" $ENVFILE
 # Update permissions in Laravel dir
 docker-compose exec -d -w /var/www/html php chown -R www-data:www-data .
 
-# Run default Laravel Migrations
-sleep 5
-docker-compose run --rm artisan migrate
-
