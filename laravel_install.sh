@@ -4,8 +4,68 @@ DIR=$PWD
 # Stop Services
 $DIR/service_down.sh
 
+# Verbose some output
+clear
+echo ""
+echo "We are setting up your new Laravel instance. Please provide some parameters."
+echo "Just hit <ENTER> to use default values for any question."
+echo ""
+
 # Set environment
-cp $DIR/.env.example $DIR/.env
+cp -rf $DIR/.env.example $DIR/.env
+ENVFILE=$DIR/.env
+
+# Inject provided parameters into ENV file
+echo "What is the name of your App?"
+read appname
+if [ -n "$appname" ]
+then
+  sed -i '' -e "s/Fresh Laravel App/$appname/g" $ENVFILE
+fi
+echo ""
+echo "Give a unique identifier for the docker service (zB: laravel_app)"
+read servicename
+if [ -n "$servicename" ]
+then
+  sed -i '' -e "s/laravel_test/$servicename/g" $ENVFILE
+fi
+echo ""
+echo "At what URL will the app be accessible (https://app.com)"
+read appurl
+if [ -n "$appurl" ]
+then
+  sed -i '' -e "s#test.local#$appurl#g" $ENVFILE
+fi
+echo ""
+echo "What's the Admin's Email address?"
+read adminemail
+if [ -n "$adminemail" ]
+then
+  sed -i '' -e "s/info@domain.com/$adminemail/g" $ENVFILE
+fi
+echo ""
+echo "Name the MySQL database:"
+read dbname
+if [ -n "$dbname" ]
+then
+  sed -i '' -e "s/laraveldb/$dbname/g" $ENVFILE
+fi
+echo ""
+echo "Name the MySQL database user:"
+read dbuser
+if [ -n "$dbuser" ]
+then
+  sed -i '' -e "s/laravelapp/$dbuser/g" $ENVFILE
+fi
+echo ""
+echo "Set a MySQL database password:"
+read dbpassword
+if [ -n "$dbpassword" ]
+then
+  sed -i '' -e "s/You-will-never-guesS/$dbpassword/g" $ENVFILE
+fi
+
+# USE ENV file for installation
 source $DIR/.env
 
 # Re-Create MySQL Database
