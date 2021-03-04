@@ -100,3 +100,12 @@ services:
     entrypoint: ["php", "artisan", "schedule:work"]
     networks:
       - dockerland
+
+  mailhog:
+    image: 'mailhog/mailhog:latest'
+    container_name: mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - dockerland
