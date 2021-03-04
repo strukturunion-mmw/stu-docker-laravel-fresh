@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Inspired by https://www.youtube.com/watch?v=K-JrkQxLAms&ab_channel=AndrewSchmelyun
+
 # Install Laravel breeze
 docker-compose run --rm composer require laravel/breeze --dev
 docker-compose run --rm artisan breeze:install
