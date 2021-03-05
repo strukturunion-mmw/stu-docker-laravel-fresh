@@ -13,6 +13,7 @@ services:
     depends_on:
       - php
       - mysql
+      - mailhog
     volumes:
       - ./src:/var/www/html
     networks:
