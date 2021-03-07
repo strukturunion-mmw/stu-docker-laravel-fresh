@@ -1,5 +1,5 @@
 
-// Initial VieJS Configuration with sample component
+// Initial VueJS Configuration with sample component
 import Vue from "vue";
 
 import VuejsComponent from './vuejs/vuejs-component.vue'
