@@ -104,3 +104,6 @@ if [ $VUE2INSTALL = "y" ]
 then
   $DIR/install_vuejs2.sh $BREEZEINSTALL
 fi
+
+# Initial Migrations
+$DIR/initial_migration.sh

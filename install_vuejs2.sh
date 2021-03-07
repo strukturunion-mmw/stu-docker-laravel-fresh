@@ -39,6 +39,10 @@ docker-compose run --rm npm run dev
 # First productive Development build
 docker-compose run --rm npm run dev
 
+# Install Tailwind CSS if Breeze was not installed
+if [ $BREEZEINSTALL != "y" ]
+then
+
 # Install tailwind css
 docker-compose run --rm npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
 
@@ -54,3 +58,5 @@ cat $DIR/vuejs2/app.css >> $FILE
 
 # Complete installation with NPM Development build
 docker-compose run --rm npm run dev
+
+fi
