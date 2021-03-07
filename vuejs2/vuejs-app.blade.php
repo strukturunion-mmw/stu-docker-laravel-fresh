@@ -14,10 +14,8 @@
 
     </head>
     <body class="antialiased">
-        <div class="container mx-auto">
-            <div id="app">
-                <vuejs-component></vuejs-component>
-            </div>
+        <div id="app">
+            <router-view></router-view>
         </div>
     <script src="{{ mix('js/app.js') }}"></script>
     </body>

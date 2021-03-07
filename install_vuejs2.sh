@@ -10,12 +10,13 @@ DIR=$PWD
 docker-compose run --rm npm install
 
 # Install VueJS 2
-docker-compose run --rm npm install --save vue vue-template-compiler
+docker-compose run --rm npm install --save vue vue-template-compiler vuex vue-router
 
 # Copy VueJS Blade and Sample component from Templates
 cp $DIR/vuejs2/vuejs-app.blade.php $DIR/src/resources/views/
 mkdir $DIR/src/resources/js/vuejs
 cp $DIR/vuejs2/vuejs-component.vue $DIR/src/resources/js/vuejs/
+cp $DIR/vuejs2/routes.js $DIR/src/resources/js/vuejs/
 
 # exchange default blade in web routes
 FILE=$DIR/src/routes/web.php
