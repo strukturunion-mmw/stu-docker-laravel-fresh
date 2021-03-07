@@ -29,7 +29,7 @@ REPLACE="'public\/js').vue()"
 sed -i '' -e "s/$FIND/$REPLACE/" $FILE
 
 # Add Vue initialisation snippet to to app.js
-FILE=$DIR/src/resources/js
+FILE=$DIR/src/resources/js/app.js
 cat $DIR/vuejs2/app.js >> $FILE
 
 # Intermittend NPM Development build
@@ -44,7 +44,7 @@ docker-compose run --rm npm install -D tailwindcss@latest postcss@latest autopre
 # add require("tailwindcss"), to webpack.mix.js
 FILE=$DIR/src/webpack.mix.js
 FIND=".postCss('resources\/css\/app.css', 'public\/css', \["
-REPLACE=".postCss('resources\/css\/app.css', 'public\/css', \[require("tailwindcss"),"
+REPLACE=".postCss('resources\/css\/app.css', 'public\/css', \[require(\"tailwindcss\"),"
 sed -i '' -e "s/$FIND/$REPLACE/" $FILE
 
 # Add tailwind components to /resources/css/app.css
