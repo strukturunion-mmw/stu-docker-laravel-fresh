@@ -1,4 +1,5 @@
 #!/bin/bash
+BREEZEINSTALL=$1
 
 # Inspired by https://www.youtube.com/watch?v=uUDxCUVkdLY&list=TLPQMDYwMzIwMjG2UGTiniXZ7A
 

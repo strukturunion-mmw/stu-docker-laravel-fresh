@@ -16,54 +16,53 @@ cp -rf $DIR/.env.example $DIR/.env
 ENVFILE=$DIR/.env
 
 # Inject provided parameters into ENV file
-echo "What is the name of your App?"
-read appname
+read -p "What is the name of your App [Fresh Laravel App]? " appname
 if [ -n "$appname" ]
 then
   sed -i '' -e "s/Fresh Laravel App/$appname/g" $ENVFILE
 fi
-echo ""
-echo "Give a unique identifier for the docker service (zB: laravel_app)"
-read servicename
+read -p  "Give a unique identifier for the docker service [laravel_test]: " servicename
 if [ -n "$servicename" ]
 then
   sed -i '' -e "s/laravel_test/$servicename/g" $ENVFILE
 fi
-echo ""
-echo "At what URL will the app be accessible (https://app.com)"
-read appurl
+read -p "At what URL will the app be accessible [localhost]: " appurl
 if [ -n "$appurl" ]
 then
   sed -i '' -e "s#test.local#$appurl#g" $ENVFILE
 fi
+
 echo ""
-echo "What's the Admin's Email address?"
-read adminemail
+read -p "What's the Admin's Email address [info@domain.com]? " adminemail
 if [ -n "$adminemail" ]
 then
   sed -i '' -e "s/info@domain.com/$adminemail/g" $ENVFILE
 fi
-echo ""
-echo "Name the MySQL database:"
-read dbname
+read -p  "Name the MySQL database [laraveldb]: " dbname
 if [ -n "$dbname" ]
 then
   sed -i '' -e "s/laraveldb/$dbname/g" $ENVFILE
 fi
-echo ""
-echo "Name the MySQL database user:"
-read dbuser
+read -p  "Name the MySQL database user [laravelapp]: " dbuser
 if [ -n "$dbuser" ]
 then
   sed -i '' -e "s/laravelapp/$dbuser/g" $ENVFILE
 fi
-echo ""
-echo "Set a MySQL database password:"
-read dbpassword
+read -p  "Set a MySQL database password [You-will-never-guesS]: " dbpassword
 if [ -n "$dbpassword" ]
 then
   sed -i '' -e "s/You-will-never-guesS/$dbpassword/g" $ENVFILE
 fi
+
+# Check further installation options
+echo ""
+read -p "Do you wish to install the Breeze Authentication package [n]?" BREEZEINSTALL
+BREEZEINSTALL=${BREEZEINSTALL:-n}
+read -p "Do you wish to set up VueJS 2 iny our application [n]?" VUE2INSTALL
+VUE2INSTALL=${VUE2INSTALL:-n}
+
+#Start installation
+clear
 
 # USE ENV file for installation
 source $DIR/.env
@@ -94,3 +93,14 @@ sed -i '' -e "s/DB_PASSWORD=/DB_PASSWORD=$MYSQL_PASSWORD/g" $ENVFILE
 # Update permissions in Laravel dir
 docker-compose exec -d -w /var/www/html php chown -R www-data:www-data .
 
+#Perform Breeze/Auth installation
+if [ $BREEZEINSTALL = "y" ]
+then
+  $DIR/install_authentication.sh
+fi
+
+#Perform VueJS 2 installation
+if [ $VUE2INSTALL = "y" ]
+then
+  $DIR/install_vuejs2.sh $BREEZEINSTALL
+fi
