@@ -8,7 +8,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: nginx.dockerfile
+      dockerfile: docker-compose_nginx.dockerfile
     container_name: nginx
     depends_on:
       - php
@@ -26,7 +26,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: php.dockerfile
+      dockerfile: docker-compose_php.dockerfile
     container_name: php
     volumes:
       - ./src:/var/www/html
@@ -60,7 +60,7 @@ services:
   artisan:
     build:
       context: .
-      dockerfile: php.dockerfile
+      dockerfile: docker-compose_artisan.dockerfile
     container_name: artisan
     depends_on:
       - php
@@ -93,7 +93,7 @@ services:
   scheduler:
     build:
       context: .
-      dockerfile: php.dockerfile
+      dockerfile: docker-compose_php.dockerfile
     container_name: scheduler
     volumes:
       - ./src:/var/www/html
