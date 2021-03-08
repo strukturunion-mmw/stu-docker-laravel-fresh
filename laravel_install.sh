@@ -58,6 +58,12 @@ fi
 echo ""
 read -p "Do you wish to install the Breeze Authentication package [n]?" BREEZEINSTALL
 BREEZEINSTALL=${BREEZEINSTALL:-n}
+if [ BREEZEINSTALL != "y" ]
+then
+  echo ""
+  read -p "Do you wish to install the Jetstream Authentication package [n]?" JETSTREAMINSTALL
+  JETSTREAMINSTALL=${JETSTREAMINSTALL:-n}
+fi
 read -p "Do you wish to set up VueJS 2 iny our application [n]?" VUE2INSTALL
 VUE2INSTALL=${VUE2INSTALL:-n}
 
@@ -96,14 +102,22 @@ docker-compose exec -d -w /var/www/html php chown -R www-data:www-data .
 #Perform Breeze/Auth installation
 if [ $BREEZEINSTALL = "y" ]
 then
-  $DIR/install_authentication.sh
+  $DIR/laravel_module_auth_breeze.sh
+  AUTHINSTALLED="y"
+fi
+
+#Perform Jetstream/Auth installation
+if [ $JETSTREAMINSTALL = "y" ]
+then
+  $DIR/laravel_module_auth_jetstream.sh
+  AUTHINSTALLED="y"
 fi
 
 #Perform VueJS 2 installation
 if [ $VUE2INSTALL = "y" ]
 then
-  $DIR/install_vuejs2.sh $BREEZEINSTALL
+  $DIR/laravel_module_vuejs2.sh $AUTHINSTALLED
 fi
 
 # Initial Migrations
-$DIR/initial_migration.sh
+$DIR/laravel_module_initial_migration.sh

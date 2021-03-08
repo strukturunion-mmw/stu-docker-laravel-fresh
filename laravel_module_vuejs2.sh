@@ -1,5 +1,5 @@
 #!/bin/bash
-BREEZEINSTALL=$1
+AUTHINSTALLED=$1
 
 # Inspired by https://www.youtube.com/watch?v=uUDxCUVkdLY&list=TLPQMDYwMzIwMjG2UGTiniXZ7A
 
@@ -41,7 +41,7 @@ docker-compose run --rm npm run dev
 docker-compose run --rm npm run dev
 
 # Install Tailwind CSS if Breeze was not installed
-if [ $BREEZEINSTALL != "y" ]
+if [ $AUTHINSTALLED != "y" ]
 then
 
 # Install tailwind css
