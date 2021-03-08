@@ -60,11 +60,10 @@ read -p "Do you wish to install the Breeze Authentication package [n]?" BREEZEIN
 BREEZEINSTALL=${BREEZEINSTALL:-n}
 if [ BREEZEINSTALL != "y" ]
 then
-  echo ""
   read -p "Do you wish to install the Jetstream Authentication package [n]?" JETSTREAMINSTALL
   JETSTREAMINSTALL=${JETSTREAMINSTALL:-n}
 fi
-read -p "Do you wish to set up VueJS 2 iny our application [n]?" VUE2INSTALL
+read -p "Do you wish to set up VueJS 2 in your application [n]?" VUE2INSTALL
 VUE2INSTALL=${VUE2INSTALL:-n}
 
 #Start installation
