@@ -58,13 +58,24 @@ fi
 echo ""
 read -p "Do you wish to install the Breeze Authentication package [n]?" BREEZEINSTALL
 BREEZEINSTALL=${BREEZEINSTALL:-n}
-if [ BREEZEINSTALL != "y" ]
+if [ $BREEZEINSTALL != "y" ]
 then
+  # If Breeze Install was opted out, ask for Jetstream Installation
   read -p "Do you wish to install the Jetstream Authentication package [n]?" JETSTREAMINSTALL
   JETSTREAMINSTALL=${JETSTREAMINSTALL:-n}
+  # If Jetstream was opted in, ask for Inertia option (if no, Livewire will be used)
+  if [ $JETSTREAMINSTALL = "y" ]
+    then
+      read -p "Do you wish to install the Inertia flavor with VueJS [y]?" INERTIAINSTALL
+      INERTIAINSTALL=${INERTIAINSTALL:-y}
+  fi
 fi
-read -p "Do you wish to set up VueJS 2 in your application [n]?" VUE2INSTALL
-VUE2INSTALL=${VUE2INSTALL:-n}
+if [ $JETSTREAMINSTALL != "y" ]
+  then
+  # Ask for additional Vue Install if Jetstream was opted out
+  read -p "Do you wish to set up VueJS 2 in your application [n]?" VUE2INSTALL
+  VUE2INSTALL=${VUE2INSTALL:-n}
+fi
 
 #Start installation
 clear
@@ -108,7 +119,7 @@ fi
 #Perform Jetstream/Auth installation
 if [ $JETSTREAMINSTALL = "y" ]
 then
-  $DIR/laravel_module_auth_jetstream.sh
+  $DIR/laravel_module_auth_jetstream.sh $INERTIAINSTALL
   AUTHINSTALLED="y"
 fi
 

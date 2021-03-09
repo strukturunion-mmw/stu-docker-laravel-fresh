@@ -1,10 +1,18 @@
 #!/bin/bash
+INERTIAINSTALL=$1
 
 # Inspired by https://www.youtube.com/watch?v=K-JrkQxLAms
 
 # Install Laravel breeze
 docker-compose run --rm composer require laravel/jetstream
-docker-compose run --rm artisan jetstream:install livewire
+
+if [ $INERTIAINSTALL = 'y' ]
+    then
+    docker-compose run --rm artisan jetstream:install inertia
+    else
+    docker-compose run --rm artisan jetstream:install livewire
+fi
+
 docker-compose run --rm npm install
 docker-compose run --rm npm run dev
 docker-compose run --rm artisan migrate
