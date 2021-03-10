@@ -20,6 +20,18 @@ docker-compose run --rm artisan migrate
 # Set base Dir
 DIR=$PWD
 
+# Update User-Model to implement Verification Email
+FILE=$DIR/src/app/Models/User.php
+FIND="class User extends Authenticatable"
+REPLACE="class User extends Authenticatable implements MustVerifyEmail"
+sed -i '' -e "s/$FIND/$REPLACE/" $FILE
+
+# Update Fortify Config to implement Verification Email
+FILE=$DIR/src/config/fortify.php
+FIND="\/\/ Features::emailVerification"
+REPLACE="Features::emailVerification"
+sed -i '' -e "s/$FIND/$REPLACE/" $FILE
+
 # Inject Sender Email into project ENV file
 source $DIR/.env
 FILE=$DIR/src/.env
