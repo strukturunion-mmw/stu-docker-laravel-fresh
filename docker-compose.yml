@@ -73,7 +73,7 @@ services:
       - dockerland
 
   npm:
-    image: node:13.7
+    image: jitesoft/node-yarn:stable-slim
     container_name: npm
     volumes:
       - ./src:/var/www/html
@@ -83,10 +83,19 @@ services:
       - dockerland
 
   yarn:
-    image: jitesoft/node-yarn:latest
+    image: jitesoft/node-yarn:stable-slim
+    deploy:
+      resources:
+        limits:
+          memory: 3000m
+        reservations:
+          memory: 3000m
     container_name: yarn
+    ports:
+      - 8080:8080
+      - 8180:80
     volumes:
-      - ./src:/var/www/html
+      - .:/var/www/html
     working_dir: /var/www/html
     entrypoint: [ "yarn" ]
     networks:
