@@ -82,6 +82,16 @@ services:
     networks:
       - dockerland
 
+  yarn:
+    image: jitesoft/node-yarn:latest
+    container_name: yarn
+    volumes:
+      - ./src:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: [ "yarn" ]
+    networks:
+      - dockerland
+
   redis:
     image: redis:latest
     container_name: redis
