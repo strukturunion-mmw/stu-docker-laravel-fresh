@@ -1,6 +1,0 @@
-
-
-- added all dependencies plus „raw-loader“ to the package.json
-
-- ran npm install & npm run dev
-

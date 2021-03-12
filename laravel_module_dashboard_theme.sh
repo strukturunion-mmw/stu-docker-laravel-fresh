@@ -12,13 +12,13 @@ mv $DIR/src/webpack.mix.js $DIR/src/webpack.mix.js.INERTIA
 
 # Pull in sample dashboard theme files and webpack config
 cp -R $DIR/dashboard/app $DIR/src/resources
-cp $DIR/dashboard/webpack.config.js $DIR/src
+cp $DIR/dashboard/tailwind.config.js $DIR/src
 cp $DIR/dashboard/webpack.mix.js $DIR/src
 
 # Inject dependencies into NPM package.json
 FILE=$DIR/src/package.json
 FIND="\"devDependencies\": {"
-REPLACE=$(<"$(DIR)/dashboard/inject_to_package.json")
+REPLACE=$(<"$DIR/dashboard/inject_to_package.json")
 sed -i '' -e "s/$FIND/$REPLACE/" $FILE
 
 # Install NPM dependencies
